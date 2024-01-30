@@ -121,7 +121,7 @@ categoryId: string | required
 ###### query params
 
 ```
-page: string
+page: number
 ```
 
 ##### response
@@ -189,7 +189,7 @@ dishId: string
 **GET /dishes**  
 ##### query params
 ```
-page: string
+page: number
 ```
 ##### Response
 
