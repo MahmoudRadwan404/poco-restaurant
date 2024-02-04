@@ -200,7 +200,7 @@ dishId: string
 dish: object
 ```
 ----------------------------------------------------
-## Restaurant blogs
+## Restaurant blog
 ### see all restaurant blogs  
 -**GET /list-blogs**
 ### see an specific blog
