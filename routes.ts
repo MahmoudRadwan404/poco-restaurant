@@ -64,7 +64,7 @@ app.post("/cart/add/:itemId", addItem);
 app.get("/pay", payment);*/
 //Dishes reviews
 app.post("/review/:dishId", addReview);
-app.get("/reviews/:dishId", displayReviews);
+app.get("/review/:dishId", displayReviews);
 app.put("/review/:reviewId", updateReview);
 app.delete("/review/:reviewId", deleteReview);
 //Restaurant admin
