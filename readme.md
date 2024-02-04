@@ -79,7 +79,7 @@ confirmPassword: string | required
 ### Retrieve dishes related to a specific category
 -**GET /category/{categoryId}**
 ### Retrieve all dishes related to  categories
--**GET /categories**
+-**GET /category**
 ### Update a specific category
 **PUT /category/{categoryId}**
 ### Delete a specific category
@@ -104,7 +104,7 @@ categoryId: string
 ```
 categoryId: string | required
 ```
-**GET /listCategories**
+**GET /category**
 ###### query params
 ```
 page: number
@@ -141,7 +141,7 @@ categoryId: string | required
 ### Update specific dish
 -**PUT /dish/{dishId}**
 ### Retrieve all dishes.
--**GET /dishes**  
+-**GET /dish**  
 ### Retrieve a specific dish
 -**GET /dish/{dishId}**  
 
@@ -173,7 +173,7 @@ dishId: string
 ```
 dishId: string
 ```
-**GET /dishes**  
+**GET /dish**  
 ##### query params
 ```
 page: number
