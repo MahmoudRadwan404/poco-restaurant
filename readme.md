@@ -243,6 +243,7 @@ id: string
 -**POST /blog**
 ###### body params
 ```
+title:string
 image: buffer
 description: string
 ```
