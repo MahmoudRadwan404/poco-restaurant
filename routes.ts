@@ -40,10 +40,10 @@ app.post("/reset", reset);
 app.post("/verify/email", verifyEmail);
 //Restaurant categories
 app.post("/categories", addCategory);
-app.get("/category/:categoryId", dishesByCategories);
+app.get("/categories/:categoryId", dishesByCategories);
 app.get("/categories", listCategories);
-app.put("/category/:categoryId", updateCategory);
-app.delete("/category/:categoryId", deleteCategory);
+app.put("/categories/:categoryId", updateCategory);
+app.delete("/categories/:categoryId", deleteCategory);
 //Restaurant dishes
 app.post("/dish", addDish);
 app.get("/dishes", listDishes);

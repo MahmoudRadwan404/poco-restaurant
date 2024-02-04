@@ -114,27 +114,27 @@ confirmPassword: string | required
 
 ### ADD new category
 
--**POST /category**
+-**POST /categories**
 
 ### Retrieve dishes related to a specific category
 
--**GET /category/{categoryId}**
+-**GET /categories/{categoryId}**
 
 ### Retrieve all dishes related to categories
 
--**GET /category**
+-**GET /categories**
 
 ### Update a specific category
 
-**PUT /category/{categoryId}**
+**PUT /categories/{categoryId}**
 
 ### Delete a specific category
 
-**DELETE /category/{categoryId}**
+**DELETE /categories/{categoryId}**
 
 ---
 
-**POST /category**
+**POST /categories**
 
 ###### body params
 
@@ -148,7 +148,7 @@ categoryName: string
 categoryName: string | required
 ```
 
-**GET /category/:categoryId**
+**GET /categories/:categoryId**
 
 ###### Query params
 
@@ -162,7 +162,7 @@ categoryId: string
 categoryId: string | required
 ```
 
-**GET /category**
+**GET /categories**
 
 ###### query params
 
@@ -183,7 +183,7 @@ page: number
 }
 ```
 
-**PUT /category/:categoryId**
+**PUT /categories/:categoryId**
 
 ###### query params
 
@@ -191,7 +191,7 @@ page: number
 categoryId: string | required
 ```
 
-**DELETE /category/:categoryId**
+**DELETE /categories/:categoryId**
 
 ###### query params
 
@@ -205,27 +205,27 @@ categoryId: string | required
 
 ### Add new dish
 
--**POST /dish**
+-**POST /dishes**
 
 ### Delete a specific dish
 
--**DELETE /dish/{dishId}**
+-**DELETE /dishes/{dishId}**
 
 ### Update specific dish
 
--**PUT /dish/{dishId}**
+-**PUT /dishes/{dishId}**
 
 ### Retrieve all dishes.
 
--**GET /dish**
+-**GET /dishes**
 
 ### Retrieve a specific dish
 
--**GET /dish/{dishId}**
+-**GET /dishes/{dishId}**
 
 ---
 
-**POST /dish**
+**POST /dishes**
 
 ##### body params
 
@@ -247,7 +247,7 @@ description: string
 ingredients: string
 ```
 
-**DELETE /dish/:dishId**
+**DELETE /dishes/:dishId**
 
 ##### query params
 
@@ -255,7 +255,7 @@ ingredients: string
 dishId: string
 ```
 
-**PUT /dish/:dishId**
+**PUT /dishes/:dishId**
 
 ##### query params
 
@@ -263,7 +263,7 @@ dishId: string
 dishId: string
 ```
 
-**GET /dish**
+**GET /dishes**
 
 ##### query params
 
@@ -284,7 +284,7 @@ page: number
 }
 ```
 
-**GET /dish/:dishId**
+**GET /dishes/:dishId**
 
 ##### query params
 
@@ -302,27 +302,27 @@ dish: object
 
 ## Restaurant blog
 
-### see all restaurant blogs
+### see all restaurant posts in the blog
 
--**GET /blog**
+-**GET /blogs**
 
-### see an specific blog
+### see an specific post
 
--**GET /blog/{id}**
+-**GET /blogs/{id}**
 
-### Add new blog
+### Add new post
 
--**POST /blog**
+-**POST /blogs**
 
-### Update specific blog
+### Update specific post
 
--**UPDATE /blog/{id}**
+-**UPDATE /blogs/{id}**
 
-### Delete specific blog
+### Delete specific post
 
-## -**DELETE /blog/{id}**
+## -**DELETE /blogs/{id}**
 
-**GET /blog**
+**GET /blogs**
 
 ###### query params
 
@@ -344,7 +344,7 @@ title: string
 }
 ```
 
-**GET /blog/:id**
+**GET /blogs/:id**
 
 ###### query params
 
@@ -360,7 +360,7 @@ id: string
 }
 ```
 
--**POST /blog**
+-**POST /blogs**
 
 ###### body params
 
@@ -377,7 +377,7 @@ image: buffer | required
 description: string | required
 ```
 
--**UPDATE /blog/:id**
+-**UPDATE /blogs/:id**
 
 ###### query params
 
@@ -393,7 +393,7 @@ id: string
 }
 ```
 
--**DELETE /blog/:id**
+-**DELETE /blogs/:id**
 
 ###### query params
 
@@ -493,15 +493,15 @@ numOfItem: number| required
 
 ### Add review to the item
 
--**POST /review/{dishId}**
+-**POST /reviews/{dishId}**
 
 ### Delete review
 
--**DELETE /review/{reviewId}**
+-**DELETE /reviews/{reviewId}**
 
 ### Update review
 
--**PUT /review/{reviewId}**
+-**PUT /reviews/{reviewId}**
 
 ---
 
@@ -519,7 +519,7 @@ itemId: string
 reviews:object[]
 ```
 
-**POST /review/:itemId**
+**POST /reviews/:itemId**
 
 ###### Query params
 
@@ -545,7 +545,7 @@ name: string | required
 email: string | required
 ```
 
-**DELETE /review/:reviewId**
+**DELETE /reviews/:reviewId**
 
 ###### Query params
 
@@ -553,7 +553,7 @@ email: string | required
 reviewId : string
 ```
 
-**PUT /review/:reviewId**
+**PUT /reviews/:reviewId**
 
 ###### Query params
 
@@ -577,19 +577,19 @@ review : string| required
 
 ### Retrieve specific admin
 
--**GET /admin/{id}**
+-**GET /admins/{id}**
 
 ### Add admin
 
--**POST /admin**
+-**POST /admins**
 
-### Delete admin
+### Delete admins
 
--**DELETE /admin/{id}**
+-**DELETE /admins/{id}**
 
 ### Update specific admin
 
--**PUT /admin/{id}**
+-**PUT /admins/{id}**
 
 ### Retrieve messages
 
@@ -605,7 +605,7 @@ review : string| required
 admins: object[]
 ```
 
-**GET /admin/:adminId**
+**GET /admins/:adminId**
 
 ###### Query params
 
@@ -619,7 +619,7 @@ adminId: string | required
 admin:object
 ```
 
-**POST /admin**
+**POST /admins**
 
 ###### body params
 
@@ -639,7 +639,7 @@ password: string | required
 confirmPassword: string | required
 ```
 
-**DELETE /admin/:adminId**
+**DELETE /admins/:adminId**
 
 ###### Query params
 
@@ -647,7 +647,7 @@ confirmPassword: string | required
 adminId: string | required
 ```
 
-**UPDATE /admin/:adminId**
+**UPDATE /admins/:adminId**
 
 ###### Query params
 
@@ -663,7 +663,7 @@ email: string | required
 password: string  | required
 ```
 
-**GET /admin/messages**
+**GET /admins/messages**
 
 ###### Response
 
@@ -675,7 +675,7 @@ message: object[]
 
 ### Send message
 
--**POST /message**
+-**POST /messages**
 
 ### Subscribe for news
 
@@ -685,7 +685,7 @@ message: object[]
 
 ## **GET /questions**
 
-**POST /message**
+**POST /messages**
 
 ###### body params
 
