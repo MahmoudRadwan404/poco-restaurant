@@ -79,7 +79,7 @@ confirmPassword: string | required
 ### Retrieve dishes related to a specific category
 -**GET /category/{categoryId}**
 ### Retrieve all dishes related to  categories
--**GET /list-categories**
+-**GET /categories**
 ### Update a specific category
 **PUT /category/{categoryId}**
 ### Delete a specific category
@@ -202,7 +202,7 @@ dish: object
 ----------------------------------------------------
 ## Restaurant blog
 ### see all restaurant blogs  
--**GET /list-blogs**
+-**GET /blog**
 ### see an specific blog
 -**GET /blog/{id}**
 ### Add new blog
@@ -212,7 +212,7 @@ dish: object
 ### Delete specific blog
 -**DELETE /blog/{id}**
 ------
-**GET /list-blogs**
+**GET /blog**
 ###### query params
 ```
 page: number
@@ -277,16 +277,16 @@ id: string
 ----------------------------------------------------
 ## Restaurant cart
 ### Retrieve cart items
--**GET /cart-items/{userId}**
+-**GET /cart/items/{userId}**
 ### Add item to the cart
--**POST /Add-item/{itemId}**
+-**POST /cart/add/{itemId}**
 ### Delete item
--**DELETE /cart-item/{itemId}**
+-**DELETE /cart/{itemId}**
 ### Update specific item
--**PUT /cart-items/{ItemId}**
+-**PUT /cart/{ItemId}**
 
 -------
- **GET /cart-items/:userId**
+ **GET /cart/items/:userId**
 ###### Query params 
 ```
 userId: string
@@ -295,7 +295,7 @@ userId: string
 ```
  message:object
 ```
-**POST /add-item/:itemId**
+**POST /add/:itemId**
 ###### body params
 ```
 itemId:string | required
@@ -307,12 +307,12 @@ itemId:string |required
 NumOfItems: number| required
 ```
 
- **DELETE /cart-item/:itemId**
+ **DELETE /cart/:itemId**
 ###### Query params
 ```
 itemId: string
 ```
-**UPDATE /cart-item/:itemId**
+**UPDATE /cart/:itemId**
 ###### Query params
 ```
 itemId: string | required
@@ -324,16 +324,16 @@ numOfItem: number| required
 -----------------------------------------------
 ## Dishes reviews
 ### Retrieve items reviews
--**GET /item-reviews/{itemId}**
+-**GET /reviews/{dishId}**
 ### Add review to the item
--**POST /Add-review/{itemID}**
+-**POST /review/{dishId}**
 ### Delete review
--**DELETE /{reviewId}**
+-**DELETE /review/{reviewId}**
 ### Update review
--**PUT /{reviewId}**
+-**PUT /review/{reviewId}**
 
 -----------------------------------------
-**GET /item-reviews/:itemId**
+**GET /reviews/:itemId**
 ###### Query params
 ```
 itemId: string
@@ -342,7 +342,7 @@ itemId: string
 ```
 reviews:object[]
 ```
-**POST /add-review/:itemId**
+**POST /review/:itemId**
 ###### Query params
 ```
 itemId: string
@@ -382,13 +382,13 @@ review : string| required
 ### Retrieve specific admin
 -**GET /admin/{id}**
 ### Add admin
--**POST /Admin**
+-**POST /admin**
 ### Delete admin
 -**DELETE /admin/{id}**
 ### Update specific admin
 -**PUT /admin/{id}**
 ### Retrieve messages
--**GET /Users-messages**
+-**GET /messages**
 
 ---------------------------------------------
 
@@ -437,7 +437,7 @@ userName: string | required
 email: string | required
 password: string  | required
 ```
-**GET /admin/Users-messages**
+**GET /admin/messages**
 ###### Response
 ```
 message: object[]
