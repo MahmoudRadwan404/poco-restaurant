@@ -88,15 +88,13 @@
 
 ### See frequently asked questions
 
-## **GET /questions**
-
-### address crud
+**GET /questions**
 
 ### return all user addresses
 
 **GET /users/{userId}/addresses**
 
-### return specific user address //put it as default
+### return specific user address
 
 **GET /users/{userId}/addresses/{addressId}**
 
