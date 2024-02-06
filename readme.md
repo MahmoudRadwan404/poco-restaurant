@@ -40,11 +40,11 @@
 
 ### see all restaurant posts in the blog
 
--**GET /blogs**
+-**GET /posts**
 
 ### see an specific post
 
--**GET /blogs/{id}**
+-**GET /post/{id}**
 
 ### Retrieve cart items
 
@@ -150,15 +150,15 @@
 
 ### Add new post
 
--**POST /blogs**
+-**POST /posts**
 
 ### Update specific post
 
--**UPDATE /blogs/{id}**
+-**UPDATE /posts/{id}**
 
 ### Delete specific post
 
-**DELETE /blogs/{id}**
+**DELETE /posts/{id}**
 
 ## Restaurant admin
 
@@ -552,25 +552,25 @@ dish: object
 
 ### see all restaurant posts in the blog
 
--**GET /blogs**
+-**GET /posts**
 
 ### see an specific post
 
--**GET /blogs/{id}**
+-**GET /post/{id}**
 
 ### Add new post
 
--**POST /blogs**
+-**POST /posts**
 
 ### Update specific post
 
--**UPDATE /blogs/{id}**
+-**UPDATE /posts/{id}**
 
 ### Delete specific post
 
-## -**DELETE /blogs/{id}**
+## -**DELETE /posts/{id}**
 
-**GET /blogs**
+**GET /posts**
 
 ###### query params
 
@@ -592,7 +592,7 @@ title: string
 }
 ```
 
-**GET /blogs/:id**
+**GET /posts/:id**
 
 ###### query params
 
@@ -608,7 +608,7 @@ id: string
 }
 ```
 
--**POST /blogs**
+-**POST /posts**
 
 ###### body params
 
@@ -625,7 +625,7 @@ image: buffer | required
 description: string | required
 ```
 
--**UPDATE /blogs/:id**
+-**UPDATE /posts/:id**
 
 ###### query params
 
@@ -641,7 +641,7 @@ id: string
 }
 ```
 
--**DELETE /blogs/:id**
+-**DELETE /posts/:id**
 
 ###### query params
 
