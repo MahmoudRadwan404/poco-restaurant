@@ -3,8 +3,6 @@ import * as dotenv from "dotenv";
 dotenv.config();
 const email: string = String(process.env.SENDER_EMAIL);
 const password: string = String(process.env.SENDER_PASSWORD);
-console.log("email = " + process.env.SENDER_EMAIL);
-console.log("PASSWORD = " + process.env.SENDER_PASSWORD);
 export async function verifyEmail(userEmail: string, subject: string) {
   try {
     const transporter = nodemailer.createTransport({

@@ -18,7 +18,7 @@ export default async function verifyToken(req: any, res: FastifyReply) {
 
   try {
     const secretKey: string = process.env.SECRETKEY || "";
-    await Jwt.verify(token, secretKey);
+    const result = Jwt.verify(token, secretKey);
     const found = await accessToken.findOne({ token: token });
 
     if (!found) {

@@ -1,3 +1,253 @@
+# front office:
+
+## Users Login,Registration,Forget,Reset.
+
+### Create new user
+
+-**POST /signup**
+
+### Verify user's email
+
+-**POST /verify/email**
+
+### Enter to the website
+
+-**POST /login**
+
+### send verification code to user's email.
+
+-**POST /forget**
+
+### Reset password of the user's email.
+
+-**POST /reset**
+
+### Retrieve dishes related to a specific category
+
+-**GET /categories/{categoryId}**
+
+### Retrieve all dishes related to categories
+
+-**GET /categories**
+
+### Retrieve all dishes.
+
+-**GET /dishes**
+
+### Retrieve a specific dish
+
+-**GET /dishes/{dishId}**
+
+### see all restaurant posts in the blog
+
+-**GET /blogs**
+
+### see an specific post
+
+-**GET /blogs/{id}**
+
+### Retrieve cart items
+
+-**GET /carts/{userId}/items**
+
+### Add item to the cart
+
+-**POST /carts/{userId}/items**
+
+### Delete item
+
+-**DELETE /carts/{itemId}**
+
+### Update specific item
+
+-**PUT /carts/{itemId}**
+
+## Dishes reviews
+
+### Retrieve items reviews
+
+-**GET /reviews/{dishId}**
+
+### Add review to the item
+
+-**POST /reviews/{dishId}**
+
+### Delete review
+
+-**DELETE /reviews/{reviewId}**
+
+### Update review
+
+-**PUT /reviews/{reviewId}**
+
+-**POST /messages**
+
+### Subscribe for news
+
+-**POST /subscribe**
+
+### See frequently asked questions
+
+## **GET /questions**
+
+### address crud
+
+### return all user addresses
+
+**GET /users/{userId}/addresses**
+
+### return specific user address //put it as default
+
+**GET /users/{userId}/addresses/{addressId}**
+
+### add address
+
+**POST /users/{userId}/addresses**
+
+### update address
+
+**PUT /users/{userId}/addresses/{addressId}**
+
+### delete address
+
+**DELETE /users/{userId}/addresses/{addressId}**
+
+### cancel my orders
+
+**DELETE /orders/{orderId}/cancel**
+
+### return my order
+
+**POST /orders/{orderId}/return**
+
+---
+
+# back office:
+
+## Restaurant categories
+
+### ADD new category
+
+-**POST /categories**
+
+### Update a specific category
+
+**PUT /categories/{categoryId}**
+
+### Delete a specific category
+
+**DELETE /categories/{categoryId}**
+
+### Add new dish
+
+-**POST /dishes**
+
+### Delete a specific dish
+
+-**DELETE /dishes/{dishId}**
+
+### Update specific dish
+
+-**PUT /dishes/{dishId}**
+
+### Add new post
+
+-**POST /blogs**
+
+### Update specific post
+
+-**UPDATE /blogs/{id}**
+
+### Delete specific post
+
+## -**DELETE /blogs/{id}**
+
+## Restaurant admin
+
+### Retrieve admins
+
+-**GET /admins**
+
+### Retrieve specific admin
+
+-**GET /admins/{id}**
+
+### Add admin
+
+-**POST /admins**
+
+### Delete admins
+
+-**DELETE /admins/{id}**
+
+### Update specific admin
+
+-**PUT /admins/{id}**
+
+### Retrieve messages
+
+-**GET /messages**
+
+### admin for mange orders
+
+### returns all orders
+
+**GET /orders**
+
+### return specific order
+
+**GET /orders/{orderId}**
+
+### accept order
+
+**PUT /orders/{orderId}/accept**
+
+### reject order
+
+**PUT /orders/{orderId}/reject**
+
+### return specific spoiled food
+
+**GET /spoiledOrders/{spoiledOrderId}**
+
+### return spoiled food
+
+**GET /spoiledOrders**
+
+### accept spoiled food
+
+**PUT /spoiledOrders/{spoiledOrderId}/accept**
+
+### reject spoiled food
+
+**PUT /spoiledOrders/{spoiledOrderId}/reject**
+
+### create coupon
+
+**POST /coupons**
+
+### GET coupons
+
+**GET /coupons**
+
+### GET specific coupon
+
+**GET /coupons/{couponId}**
+
+### update specific coupon
+
+**PUT /coupons/{couponId}**
+
+### DELETE specific coupon
+
+**DELETE /coupons/{couponId}**
+
+### send coupons
+
+**PUT /coupons/{userId}**
+
+---
+
 ## Users Login,Registration,Forget,Reset.
 
 ### Create new user
@@ -300,7 +550,7 @@ dish: object
 
 ---
 
-## Restaurant blog
+# Restaurant blog
 
 ### see all restaurant posts in the blog
 
@@ -484,6 +734,8 @@ numOfItem: number| required
 ```
 
 ---
+
+## front office
 
 ## Dishes reviews
 
@@ -721,4 +973,285 @@ questionId: string
 
 ```
 question: object
+```
+
+---
+
+### admin for mange orders
+
+### returns all orders
+
+**GET /orders**
+
+### return specific order
+
+**GET /orders/{orderId}**
+
+### accept order
+
+**PUT /orders/{orderId}/accept**
+
+### reject order
+
+**PUT /orders/{orderId}/reject**
+
+**GET /orders/{orderId}**
+
+###### Request params
+
+```
+orderId: string
+```
+
+**PUT /orders/{orderId}/accept**
+
+###### Request params
+
+```
+orderId: string
+```
+
+**PUT /orders/{orderId}/reject**
+
+```
+orderId: string
+```
+
+---
+
+### return specific spoiled food
+
+**GET /spoiledOrders/{spoiledOrderId}**
+
+### return spoiled food
+
+**GET /spoiledOrders**
+
+### accept spoiled food
+
+**PUT /spoiledOrders/{spoiledOrderId}/accept**
+
+### reject spoiled food
+
+**PUT /spoiledOrders/{spoiledOrderId}/reject**
+
+---
+
+**GET /spoiledOrders/{spoiledOrderId}**
+
+###### Request params
+
+```
+spoiledOrderId: string
+```
+
+**PUT /spoiledOrders/{spoiledOrderId}/accept**
+
+###### Request params
+
+```
+spoiledOrderId: string
+```
+
+**PUT /spoiledOrders/{spoiledOrderId}/reject**
+
+###### Request params
+
+```
+spoiledOrderId: string
+```
+
+---
+
+### address crud
+
+### return all user addresses
+
+**GET /users/{userId}/addresses**
+
+### return specific user address //put it as default
+
+**GET /users/{userId}/addresses/{addressId}**
+
+### add address
+
+**POST /users/{userId}/addresses**
+
+### update address
+
+**PUT /users/{userId}/addresses/{addressId}**
+
+### delete address
+
+**DELETE /users/{userId}/addresses/{addressId}**
+
+---
+
+**GET /users/{userId}/addresses**
+
+###### Request params
+
+```
+userId: string
+```
+
+**GET /users/{userId}/addresses/{addressId}**
+
+###### Request params
+
+```
+userId: string
+addressId: string
+```
+
+**POST /users/{userId}/addresses**
+
+###### Request params
+
+```
+userId: string
+
+```
+
+###### Request payload
+
+```
+area: string | required
+streetName: string | required
+buildingType: string | required
+buildingNumber: string | required
+landMark: string | required
+mobile: string | required
+```
+
+**DELETE /users/{userId}/addresses/{addressId}**
+
+###### Request params
+
+```
+userId: string
+addressId: string
+
+```
+
+**PUT /users/{userId}/addresses/{addressId}**
+
+###### Request params
+
+```
+userId: string
+addressId: string
+```
+
+###### Request payload
+
+```
+area: string | optional
+streetName: string | optional
+buildingType: string | optional
+buildingNumber: string | optional
+landMark: string | optional
+mobile: string | optional
+```
+
+---
+
+### cancel my orders
+
+**DELETE /orders/{orderId}/cancel**
+
+###### Request params
+
+```
+orderId: string
+```
+
+---
+
+---
+
+### return my order
+
+**POST /orders/{orderId}/return**
+
+###### Request params
+
+```
+orderId: string
+```
+
+###### Request payload
+
+```
+image: string
+cause: string
+```
+
+---
+
+### create coupon
+
+**POST /coupons**
+
+### GET coupons
+
+**GET /coupons**
+
+### GET specific coupon
+
+**GET /coupons/{couponId}**
+
+### update specific coupon
+
+**PUT /coupons/{couponId}**
+
+### DELETE specific coupon
+
+**DELETE /coupons/{couponId}**
+
+### send coupons
+
+**PUT /coupons/{userId}**
+
+---
+
+**POST /coupons**
+
+### Request payload
+
+```
+typeOfCoupon: string
+value: number
+minimumOrder: number
+numOfUsers:number
+```
+
+**GET /coupons/{couponId}**
+
+###### Request params
+
+```
+couponId: string
+```
+
+**PUT /coupons/{couponId}**
+
+###### Request params
+
+```
+couponId: string
+```
+
+**PUT /coupons/{userId}**
+
+###### Request params
+
+```
+userId: string
+```
+
+**DELETE /coupons/{couponId}**
+
+```
+couponId: string
 ```

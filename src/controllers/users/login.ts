@@ -10,7 +10,7 @@ export default async function login(request: any, reply: FastifyReply) {
   const usersCollection = collection("users");
   const { email, password } = requestHandler.only(["email", "password"]);
   console.log(email, password);
-  if (!loginValidation(email , password )) {
+  if (!loginValidation(email, password)) {
     return reply.send({ error: "email and password are both required" });
   }
   const accessToken = collection("accessToken");
@@ -22,15 +22,13 @@ export default async function login(request: any, reply: FastifyReply) {
     });
   }
   const secretKey: string = process.env.SECRETKEY || "";
-  console.log(secretKey);
-  const token = await newAccessToken({ email }, secretKey, {
+  const token = await newAccessToken({ user: user._id }, secretKey, {
     expiresIn: "10d",
     algorithm: "HS256",
   });
-  //console.log(token)
   const finalPassword: string = user.password;
   console.log(finalPassword);
-  const passCompare = await verifyPassword(password , finalPassword);
+  const passCompare = await verifyPassword(password, finalPassword);
   console.log(passCompare, "  ", password);
   if (passCompare) {
     await accessToken.insertOne({ id: user._id, token: token });

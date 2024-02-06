@@ -7,5 +7,6 @@ export default async function displayUsers(
 ) {
   const usersCollection = collection("users");
   const users = await usersCollection.find({}).toArray();
+
   reply.status(200).send(users);
 }
