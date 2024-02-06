@@ -48,19 +48,19 @@
 
 ### Retrieve cart items
 
--**GET /carts/{userId}/items**
+-**GET /cart/{userId}/items**
 
 ### Add item to the cart
 
--**POST /carts/{userId}/items**
+-**POST /cart/{userId}/items**
 
 ### Delete item
 
--**DELETE /carts/{itemId}**
+-**DELETE /cart/{itemId}**
 
 ### Update specific item
 
--**PUT /carts/{itemId}**
+-**PUT /cart/{itemId}**
 
 ## Dishes reviews
 
@@ -663,23 +663,23 @@ id: string
 
 ### Retrieve cart items
 
--**GET /carts/{userId}/items**
+-**GET /cart/{userId}/items**
 
 ### Add item to the cart
 
--**POST /carts/{userId}/items**
+-**POST /cart/{userId}/items**
 
 ### Delete item
 
--**DELETE /carts/{itemId}**
+-**DELETE /cart/{itemId}**
 
 ### Update specific item
 
--**PUT /carts/{itemId}**
+-**PUT /cart/{itemId}**
 
 ---
 
-**GET /carts/:userId/items**
+**GET /cart/:userId/items**
 
 ###### Query params
 
@@ -693,7 +693,7 @@ userId: string
  message:object
 ```
 
-**POST /carts/:userId/items**
+**POST /cart/:userId/items**
 
 ###### body params
 
@@ -709,7 +709,7 @@ itemId:string |required
 NumOfItems: number| required
 ```
 
-**DELETE /carts/:itemId**
+**DELETE /cart/:itemId**
 
 ###### Query params
 
@@ -717,7 +717,7 @@ NumOfItems: number| required
 itemId: string
 ```
 
-**UPDATE /carts/:itemId**
+**UPDATE /cart/:itemId**
 
 ###### Query params
 
