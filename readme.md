@@ -158,7 +158,7 @@
 
 ### Delete specific post
 
-## -**DELETE /blogs/{id}**
+**DELETE /blogs/{id}**
 
 ## Restaurant admin
 
