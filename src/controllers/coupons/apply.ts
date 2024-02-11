@@ -19,7 +19,8 @@ export default async function apply(
   let discountPercentage;
   try {
     const user = await users.findOne({ _id: new ObjectId(userId) });
-    coupon = await couponsCollection.findOne({ _id: new ObjectId(user?.code) });
+    coupon = await couponsCollection.findOne({ _id: user?.coupon });
+    console.log(coupon)
     if (coupon?.start > date && coupon?.end < date) {
       return reply.send({ msg: "expired coupon" });
     }
@@ -46,7 +47,7 @@ export default async function apply(
             discountAmount: {
               $multiply: [
                 "$totalPrice",
-                { $divide: [100, discountPercentage] },
+                { $divide: [ discountPercentage,100] },
               ],
             },
           },
@@ -62,7 +63,7 @@ export default async function apply(
             discountPrice: 1,
           },
         },
-      ]);
+      ]).toArray();
       reply.send(result);
     } else if (coupon?.type == "number") {
       const result = await cartCollection.aggregate([
@@ -91,7 +92,7 @@ export default async function apply(
             discountPrice: 1,
           },
         },
-      ]);
+      ]).toArray();
       reply.send(result);
     }
   } catch (err) {

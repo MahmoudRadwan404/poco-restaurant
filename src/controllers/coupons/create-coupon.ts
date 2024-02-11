@@ -29,14 +29,13 @@ export default async function createCoupon(
   }
   try {
     await couponsCollection.insertOne({
-      start,
-      end,
+      start:new Date(start),
+      end:new Date(end),
       numberOfUsers,
       type,
       value,
       availableCoupons,
-      minimumOrder,
-      code,
+      minimumOrder,code
     });
     reply.status(200).send({ msg: "created successfully" });
   } catch (err) {

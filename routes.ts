@@ -116,7 +116,7 @@ app.put(
   { preHandler: verifyToken },
   setCoupon
 );
-app.get("/coupon/apply", apply); //not finished
+app.get("/coupon/apply",{ preHandler: verifyToken }, apply); //not finished
 //Dishes reviews
 app.post("/reviews/:dishId", { preHandler: verifyToken }, addReview);
 app.get("/reviews/:dishId", { preHandler: verifyToken }, displayReviews);
