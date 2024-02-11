@@ -80,7 +80,7 @@
 
 -**PUT /reviews/{reviewId}**
 
--**POST /messages**
+-**POST /contactUs**
 
 ### Subscribe for news
 
@@ -88,7 +88,7 @@
 
 ### See frequently asked questions
 
-**GET /questions**
+**GET /faq**
 
 ### return all user addresses
 
@@ -180,7 +180,7 @@
 
 ### Update specific admin
 
--**PUT /admins/{id}**
+-**Patch /admins/{id}**
 
 ### Retrieve messages
 
@@ -951,7 +951,7 @@ password: string | required
 email: string | required
 ```
 
-**GET /questions**
+**GET /faq**
 
 ###### Response
 
