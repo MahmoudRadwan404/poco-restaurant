@@ -110,7 +110,7 @@ app.delete("/addresses/:id", { preHandler: verifyToken }, deleteAddress);
 app.get("/coupon/items", { preHandler: verifyToken }, displayCoupons);
 app.delete("/coupon/:couponId", { preHandler: verifyToken }, deleteCoupon);
 app.put("/coupon/:couponId", { preHandler: verifyToken }, updateCoupon);
-app.post("/coupon/:couponId", { preHandler: verifyToken }, createCoupon);
+app.post("/coupon", { preHandler: verifyToken }, createCoupon);
 app.put(
   "/set/:userId/coupon/:couponId",
   { preHandler: verifyToken },
