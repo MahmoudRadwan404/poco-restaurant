@@ -60,24 +60,43 @@ import showMessages from "./src/controllers/admin/show-messages";
 import answerQuestions from "./src/controllers/services/questions";
 import listOrders from "./src/controllers/orders/list-orders";
 import listDishesAdmin from "./src/controllers/dishes/list-dishes-admin";
+import adminListCategories from "./src/controllers/categories/admin-list-categories";
+import adminListPosts from "./src/controllers/blogs/admin-list-posts";
 //Users Login,Registration,Forget,Reset.
-app.get("/admin/users", { preHandler: [verifyToken,verifyAdmin] }, displayUsers);
-app.get("/users/:id", displayUser);
+app.get(
+  "/admin/users",
+  { preHandler: [verifyToken, verifyAdmin] },
+  displayUsers
+);
+app.get("/users/:id",{ preHandler: [verifyToken, verifyAdmin] }, displayUser);
 app.post("/signup", signup);
 app.patch("/users/:id", { preHandler: verifyToken }, updateUser);
-app.delete("/admin/users/:id", { preHandler: [verifyToken,verifyAdmin] }, deleteUser);
+app.delete(
+  "/admin/users/:id",
+  { preHandler: [verifyToken, verifyAdmin] },
+  deleteUser
+);
 app.post("/login", login);
 app.post("/forget", forget);
 app.post("/reset", reset);
 app.post("/verify/email", verifyEmail);
 //Restaurant categories
-app.post("/admin/categories", { preHandler: [verifyToken,verifyAdmin] }, addCategory);
+app.post(
+  "/admin/categories",
+  { preHandler: [verifyToken, verifyAdmin] },
+  addCategory
+);
 app.get(
   "/categories/:categoryId",
   { preHandler: verifyToken },
   dishesByCategories
 );
 app.get("/categories", { preHandler: verifyToken }, listCategories);
+app.get(
+  "/admin/categories",
+  { preHandler: [verifyToken, verifyAdmin] },
+  adminListCategories
+);
 app.put(
   "/admin/categories/:categoryId",
   { preHandler: [verifyToken, verifyAdmin] },
@@ -89,9 +108,13 @@ app.delete(
   deleteCategory
 );
 //Restaurant dishes
-app.post("/admin/dishes", { preHandler: [verifyToken,verifyAdmin] }, addDish);
+app.post("/admin/dishes", { preHandler: [verifyToken, verifyAdmin] }, addDish);
 app.get("/dishes", listDishes);
-app.get("/admin/dishes", { preHandler: [verifyToken,verifyAdmin] },listDishesAdmin);
+app.get(
+  "/admin/dishes",
+  { preHandler: [verifyToken, verifyAdmin] },
+  listDishesAdmin
+);
 app.get("/dishes/:dishId", showDish);
 app.put(
   "/admin/dishes/:dishId",
@@ -105,6 +128,7 @@ app.delete(
 );
 //Restaurant blogs
 app.get("/posts", listBlogs);
+app.get("/admin/posts", { preHandler: [verifyToken, verifyAdmin] },adminListPosts);
 app.get("/posts/:id", displayBlog);
 app.post("/admin/posts", { preHandler: [verifyToken, verifyAdmin] }, addBlog);
 app.put(
@@ -129,7 +153,11 @@ app.post("/addresses", { preHandler: verifyToken }, createAddress);
 app.put("/addresses/:id", { preHandler: verifyToken }, updateAddress);
 app.delete("/addresses/:id", { preHandler: verifyToken }, deleteAddress);
 //Restaurant coupons
-app.get("/admin/coupon/items", { preHandler: [verifyToken,verifyAdmin] }, displayCoupons);
+app.get(
+  "/admin/coupon/items",
+  { preHandler: [verifyToken, verifyAdmin] },
+  displayCoupons
+);
 app.delete(
   "/admin/coupon/:couponId",
   { preHandler: [verifyToken, verifyAdmin] },
@@ -150,7 +178,7 @@ app.put(
   { preHandler: [verifyToken, verifyAdmin] },
   setCoupon
 );
-app.get("/coupon/apply", { preHandler: verifyToken }, apply); //not finished
+app.get("/coupon/apply", { preHandler: verifyToken }, apply); 
 //Dishes reviews
 app.post("/reviews/:dishId", { preHandler: verifyToken }, addReview);
 app.get("/reviews/:dishId", { preHandler: verifyToken }, displayReviews);

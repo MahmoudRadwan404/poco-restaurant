@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import handle from "../../core/request";
 import { collection } from "../../database/connection";
 
-export default async function listBlogs(
+export default async function adminListPosts(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
@@ -14,7 +14,6 @@ export default async function listBlogs(
   const blogsCollection = collection("blogs");
   const filter = [];
   filter.push(title);
-  filter.push({ published: true });
   const blogs = await blogsCollection.find({ ...filter }).toArray();
   reply.send(blogs);
 }

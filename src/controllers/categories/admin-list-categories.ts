@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { collection } from "../../database/connection";
 import handle from "../../core/request";
 
-export default async function listCategories(
+export default async function adminListCategories(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
@@ -13,7 +13,7 @@ export default async function listCategories(
   const limit = 15;
   try {
     const categories = await categoriesCollection
-      .find({ published: true })
+      .find({})
       .limit(limit)
       .skip(skip)
       .toArray();

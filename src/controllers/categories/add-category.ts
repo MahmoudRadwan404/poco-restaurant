@@ -8,9 +8,10 @@ export default async function addCategory(
 ) {
   const requestHandler = handle(request);
   const categoryName = requestHandler.input("categoryName");
+  const published = Boolean(requestHandler.input("published")) || false;
   const categories = collection("categories");
   try {
-    const result = await categories.insertOne({ categoryName });
+    const result = await categories.insertOne({ categoryName, published });
     reply.send({ categoryId: result.insertedId });
   } catch (err) {
     reply.status(404).send({ Error: "Error inserting category" });

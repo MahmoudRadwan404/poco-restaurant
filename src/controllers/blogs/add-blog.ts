@@ -13,6 +13,7 @@ export default async function addBlog(
   const title = requestHandeler.input("title");
   const image = requestHandeler.input("image");
   const description = requestHandeler.input("description");
+  const published = Boolean(requestHandeler.input("published")) || false;
   if (!title || !image || !description) {
     reply.status(200).send({ msg: "All fields are required" });
   }
@@ -45,6 +46,7 @@ export default async function addBlog(
       baseName,
       imageUrl,
       time: now,
+      published,
     });
     reply.send({ msg: "inserted successfully" });
   } catch (err) {
