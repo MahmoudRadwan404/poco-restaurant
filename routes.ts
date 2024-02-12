@@ -70,7 +70,7 @@ app.get(
 );
 app.get("/users/:id",{ preHandler: [verifyToken, verifyAdmin] }, displayUser);
 app.post("/signup", signup);
-app.patch("/users/:id", { preHandler: verifyToken }, updateUser);
+app.patch("/admin/users/:id", { preHandler: [verifyToken,verifyAdmin] }, updateUser);
 app.delete(
   "/admin/users/:id",
   { preHandler: [verifyToken, verifyAdmin] },
