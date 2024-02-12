@@ -11,11 +11,19 @@ export default async function addDish(
   const name: string = requestHandeler.input("dishName");
   const categoryId: string = requestHandeler.input("categoryId");
   const price: number = +requestHandeler.input("price");
+  const published = Boolean(requestHandeler.input("published")) || false;
   const description: string = requestHandeler.input("description");
   const ingredients: string = requestHandeler.input("ingredients");
   if (!name || !categoryId || !price || !description || !ingredients) {
     reply.status(200).send({ msg: "all fields are required" });
   }
-  await dishes.insertOne({ name, categoryId, price, description, ingredients });
+  await dishes.insertOne({
+    name,
+    categoryId,
+    price,
+    description,
+    ingredients,
+    published,
+  });
   reply.send({ msg: "inserted successfully" });
 }

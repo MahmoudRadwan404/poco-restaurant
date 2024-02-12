@@ -3,7 +3,7 @@ import handle from "../../core/request";
 import { collection } from "../../database/connection";
 import { pipeline } from "stream";
 
-export default async function listDishes(
+export default async function listDishesAdmin(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
@@ -14,11 +14,6 @@ export default async function listDishes(
   const skip = (page - 1) * limit;
   const dishes = await dishesCollection
     .aggregate([
-      {
-        $match: {
-          published: true ,
-        },
-      },
       {
         $lookup: {
           from: "reviews",

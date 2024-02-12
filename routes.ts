@@ -59,6 +59,7 @@ import apply from "./src/controllers/coupons/apply";
 import showMessages from "./src/controllers/admin/show-messages";
 import answerQuestions from "./src/controllers/services/questions";
 import listOrders from "./src/controllers/orders/list-orders";
+import listDishesAdmin from "./src/controllers/dishes/list-dishes-admin";
 //Users Login,Registration,Forget,Reset.
 app.get("/admin/users", { preHandler: [verifyToken,verifyAdmin] }, displayUsers);
 app.get("/users/:id", displayUser);
@@ -90,6 +91,7 @@ app.delete(
 //Restaurant dishes
 app.post("/admin/dishes", { preHandler: [verifyToken,verifyAdmin] }, addDish);
 app.get("/dishes", listDishes);
+app.get("/admin/dishes", { preHandler: [verifyToken,verifyAdmin] },listDishesAdmin);
 app.get("/dishes/:dishId", showDish);
 app.put(
   "/admin/dishes/:dishId",
