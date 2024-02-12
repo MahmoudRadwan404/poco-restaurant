@@ -60,17 +60,17 @@ import showMessages from "./src/controllers/admin/show-messages";
 import answerQuestions from "./src/controllers/services/questions";
 import listOrders from "./src/controllers/orders/list-orders";
 //Users Login,Registration,Forget,Reset.
-app.get("/users", { preHandler: verifyToken }, displayUsers);
+app.get("/admin/users", { preHandler: verifyToken }, displayUsers);
 app.get("/users/:id", displayUser);
 app.post("/signup", signup);
 app.patch("/users/:id", { preHandler: verifyToken }, updateUser);
-app.delete("/users/:id", { preHandler: verifyToken }, deleteUser);
+app.delete("/admin/users/:id", { preHandler: verifyToken }, deleteUser);
 app.post("/login", login);
 app.post("/forget", forget);
 app.post("/reset", reset);
 app.post("/verify/email", verifyEmail);
 //Restaurant categories
-app.post("/categories", { preHandler: [verifyToken] }, addCategory);
+app.post("/admin/categories", { preHandler: [verifyToken] }, addCategory);
 app.get(
   "/categories/:categoryId",
   { preHandler: verifyToken },
@@ -88,7 +88,7 @@ app.delete(
   deleteCategory
 );
 //Restaurant dishes
-app.post("/dishes", { preHandler: verifyToken }, addDish);
+app.post("/admin/dishes", { preHandler: verifyToken }, addDish);
 app.get("/dishes", listDishes);
 app.get("/dishes/:dishId", showDish);
 app.put(
@@ -127,7 +127,7 @@ app.post("/addresses", { preHandler: verifyToken }, createAddress);
 app.put("/addresses/:id", { preHandler: verifyToken }, updateAddress);
 app.delete("/addresses/:id", { preHandler: verifyToken }, deleteAddress);
 //Restaurant coupons
-app.get("/coupon/items", { preHandler: verifyToken }, displayCoupons);
+app.get("/admin/coupon/items", { preHandler: verifyToken }, displayCoupons);
 app.delete(
   "/admin/coupon/:couponId",
   { preHandler: [verifyToken, verifyAdmin] },
