@@ -9,13 +9,20 @@ import forget from "../controllers/users/forget";
 import reset from "../controllers/users/reset";
 import verifyEmail from "../controllers/users/verify-email";
 import { adminMiddleware } from "../helper/middlewares/middlewares";
+import test from "../controllers/users/test";
 //Users Login,Registration,Forget,Reset.
 app.post("/signup", signup);
+app.get("/users/:id", adminMiddleware, displayUser);
 app.post("/login", login);
 app.post("/forget", forget);
 app.post("/reset", reset);
 app.post("/verify/email", verifyEmail);
-app.get("/admin/users", adminMiddleware, displayUsers);
-app.patch("/admin/users/:id", adminMiddleware, updateUser);
-app.delete("/admin/users/:id", adminMiddleware, deleteUser);
-app.get("/users/:id", adminMiddleware, displayUser);
+app.register(
+  (app, ops, next) => {
+    app.get("/users", displayUsers);
+    app.patch("/users/:id", adminMiddleware, updateUser);
+    app.delete("/users/:id", adminMiddleware, deleteUser);
+    next();
+  },
+  { prefix: "/admin" }
+);
