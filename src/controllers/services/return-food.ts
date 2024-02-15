@@ -4,6 +4,7 @@ import { collection } from "../../database/connection";
 import path from "path";
 import urlImage from "../blogs/image-url";
 import fs from "fs";
+import imageData from "../../helper/image-data";
 
 export default async function returnFood(
   request: FastifyRequest,
@@ -20,27 +21,12 @@ export default async function returnFood(
   let myPath: string | null = path.normalize(
     __dirname + `../../../../storage/uploads/${imageName}.png`
   );
-
-  let baseName: string | null = path.basename(myPath);
-  let imageUrl: string | null = urlImage(baseName);
-  if (image) {
-    fs.writeFile(myPath, image, (err) => {
-      if (err) {
-        console.log("Error" + err.message);
-      } else {
-        console.log("hallo from png");
-      }
-    });
-  } else {
-    myPath = null;
-    imageUrl = null;
-    baseName = null;
-  }
+  const result = imageData(myPath, image);
   try {
     await spoiledFood.insertOne({
       comment,
-      imageUrl,
-      baseName,
+      imageUrl: result.imageUrl,
+      baseName: result.baseName,
       status: "pending",
     });
     reply.send({ message: "Successfully delivered to the restaurant!" });

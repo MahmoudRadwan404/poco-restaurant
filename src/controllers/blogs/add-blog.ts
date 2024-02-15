@@ -4,6 +4,7 @@ import { collection } from "../../database/connection";
 import path from "path";
 import urlImage from "./image-url";
 import * as fs from "fs";
+import imageData from "../../helper/image-data";
 
 export default async function addBlog(
   request: FastifyRequest,
@@ -21,30 +22,15 @@ export default async function addBlog(
   let myPath: string | null = path.normalize(
     __dirname + `../../../../storage/uploads/${imageName}.png`
   );
-
-  let baseName: string | null = path.basename(myPath);
-  let imageUrl: string | null = urlImage(baseName);
-  if (image) {
-    fs.writeFile(myPath, image, (err) => {
-      if (err) {
-        console.log("Error" + err.message);
-      } else {
-        console.log("hallo from png");
-      }
-    });
-  } else {
-    myPath = null;
-    imageUrl = null;
-    baseName = null;
-  }
+  const result = imageData(myPath, image);
   const now = new Date();
   const blogsCollection = collection("blogs");
   try {
     await blogsCollection.insertOne({
       title,
       description,
-      baseName,
-      imageUrl,
+      baseName: result.baseName,
+      imageUrl: result.imageUrl,
       time: now,
       published,
     });

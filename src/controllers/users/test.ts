@@ -3,17 +3,18 @@ import { collection } from "../../database/connection";
 import listWithPagination from "../../helper/rud/list";
 import handle from "../../core/request";
 
-export default async function displayCoupons(
+export default async function test(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
+  const usersCollection = collection("users");
   const requestHandler = handle(request);
-  const couponsCollection = collection("coupons");
   const page = +requestHandler.input("page") || 1;
-  const coupons = await listWithPagination(couponsCollection, page,[]);
-  if (coupons) {
-    reply.status(200).send(coupons);
+  const filter: any = [];
+  const users = await usersCollection.find({ ...filter }).toArray();
+  if (users) {
+    reply.status(200).send(users);
   } else {
-    reply.status(404).send({ msg: "error displaying coupons" });
+    reply.send({ msg: "Error from display users" });
   }
 }

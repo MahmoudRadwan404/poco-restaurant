@@ -94,6 +94,7 @@ export default async function apply(
         },
       ]).toArray();
       reply.send(result);
+      
     }
   } catch (err) {
     reply.status(404).send({ msg: "error applying coupon" });

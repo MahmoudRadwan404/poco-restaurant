@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { collection } from "../../database/connection";
 import handle from "../../core/request";
 import { ObjectId } from "mongodb";
+import updateDoc from "../../helper/rud/update";
 
 export default async function updateAddress(
   request: FastifyRequest,
@@ -10,13 +11,14 @@ export default async function updateAddress(
   const requestHandler = handle(request);
   const addressId = requestHandler.input("id");
   const addressesCollection = collection("addresses");
-  try {
-    await addressesCollection.updateOne(
-      { _id: new ObjectId(addressId) },
-      { $set: request.body }
-    );
-    reply.status(200).send({ msg: "updated" });
-  } catch (err) {
-    reply.status(404).send({ Error: "error deleting address" });
+  const result = await updateDoc(
+    addressesCollection,
+    [{ _id: new ObjectId(addressId) }],
+    request
+  );
+  if (!result) {
+    reply.send("error updating address");
+  } else {
+    reply.send(result);
   }
 }

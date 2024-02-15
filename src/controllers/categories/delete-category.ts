@@ -2,20 +2,19 @@ import { ObjectId } from "mongodb";
 import { FastifyReply, FastifyRequest } from "fastify";
 import handle from "../../core/request";
 import { collection } from "../../database/connection";
+import deleteDoc from "../../helper/rud/delete";
 
 export default async function deleteCategory(
-    request: FastifyRequest,
-    reply: FastifyReply
+  request: FastifyRequest,
+  reply: FastifyReply
 ) {
-    const requestHandler = handle(request);
-    const categoryId = requestHandler.input("categoryId");
-    const categories = collection("categories");
-    try {
-        const deleted = await categories.deleteOne({
-            _id: new ObjectId(categoryId),
-        });
-        reply.status(200).send({ deleted });
-    } catch (err) {
-        reply.status(404).send({ Error: "Error deleting category" });
-    }
+  const requestHandler = handle(request);
+  const categoryId = requestHandler.input("categoryId");
+  const categories = collection("categories");
+  const result = await deleteDoc(categories, categoryId);
+  if (result) {
+    reply.send({ msg: result });
+  } else {
+    reply.send({ msg: "could not delete category" });
+  }
 }

@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb";
 import { collection } from "../../database/connection";
 import { FastifyReply, FastifyRequest } from "fastify";
 import handle from "../../core/request";
+import deleteDoc from "../../helper/rud/delete";
 
 export default async function deleteAdmin(
   req: FastifyRequest,
@@ -10,6 +11,10 @@ export default async function deleteAdmin(
   const users = collection("users");
   const requestHandler = handle(req);
   const adminId = requestHandler.input("adminId");
-  const deleted = await users.deleteOne({ _id: new ObjectId(adminId) });
-  res.send({ deleted });
+  const result = await deleteDoc(users, adminId);
+  if (result) {
+    res.send({ msg: result });
+  } else {
+    res.send({ msg: "could not delete admin" });
+  }
 }

@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { collection } from "../../database/connection";
 import handle from "../../core/request";
 import { ObjectId } from "mongodb";
+import deleteDoc from "../../helper/rud/delete";
 
 export default async function deleteAddress(
   request: FastifyRequest,
@@ -10,10 +11,10 @@ export default async function deleteAddress(
   const requestHandler = handle(request);
   const addressId = requestHandler.input("id");
   const addressesCollection = collection("addresses");
-  try {
-    await addressesCollection.deleteOne({ _id: new ObjectId(addressId) });
-    reply.status(200).send({ msg: "deleted" });
-  } catch (err) {
-    reply.send({ Error: "error deleting address" });
+  const result = await deleteDoc(addressesCollection, addressId);
+  if (result) {
+    reply.send({ msg: result });
+  } else {
+    reply.send({ msg: "could not delete address" });
   }
 }

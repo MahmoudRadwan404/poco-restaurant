@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { collection } from "../../database/connection";
 import handle from "../../core/request";
-
+import listWithPagination from "../../helper/rud/list";
 export default async function listCategories(
   request: FastifyRequest,
   reply: FastifyReply
@@ -9,21 +9,10 @@ export default async function listCategories(
   const requestHandler = handle(request);
   const categoriesCollection = collection("categories");
   const page = +requestHandler.input("page") || 1;
-  const skip = (page - 1) * 15;
-  const limit = 15;
-  try {
-    const categories = await categoriesCollection
-      .find({ published: true })
-      .limit(limit)
-      .skip(skip)
-      .toArray();
-    const pagination = {
-      pages: Math.ceil(categories.length / limit),
-      page: page,
-      categories: categories.length,
-    };
-    reply.status(200).send({ pagination, categories });
-  } catch (err) {
-    reply.status(404).send({ Error: "Error returning categories" });
+  const categories = await listWithPagination(categoriesCollection, page,[]);
+  if (categories) {
+    reply.send(categories);
+  } else {
+    reply.send("error from list categories");
   }
 }

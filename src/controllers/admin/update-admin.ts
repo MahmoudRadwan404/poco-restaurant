@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb";
 import { collection } from "../../database/connection";
 import { FastifyReply, FastifyRequest } from "fastify";
 import handle from "../../core/request";
+import updateDoc from "../../helper/rud/update";
 
 export default async function updateAdmin(
   req: FastifyRequest,
@@ -10,13 +11,14 @@ export default async function updateAdmin(
   const usersCollection = collection("users");
   const requestHandler = handle(req);
   const adminId = requestHandler.input("adminId");
-  try {
-    let newAdmin = await usersCollection.updateOne(
-      { _id: new ObjectId(adminId) },
-      { $set: req.body }
-    );
-    res.status(200).send({ newAdmin });
-  } catch (err) {
-    res.status(404).send(err);
+  const result = await updateDoc(
+    usersCollection,
+    [{ _id: new ObjectId(adminId) }],
+    req
+  );
+  if (!result) {
+    res.send("error updating address");
+  } else {
+    res.send(result);
   }
 }

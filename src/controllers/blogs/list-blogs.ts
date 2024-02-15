@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import handle from "../../core/request";
 import { collection } from "../../database/connection";
+import listWithPagination from "../../helper/rud/list";
 
 export default async function listBlogs(
   request: FastifyRequest,
@@ -9,12 +10,10 @@ export default async function listBlogs(
   const requestHandeler = handle(request);
   const title = requestHandeler.input("title");
   const page = +requestHandeler.input("page") || 1;
-  const limit = 5;
-  const skip = (page - 1) * limit;
   const blogsCollection = collection("blogs");
   const filter = [];
   filter.push(title);
   filter.push({ published: true });
-  const blogs = await blogsCollection.find({ ...filter }).toArray();
-  reply.send(blogs);
+  const blogs = listWithPagination(blogsCollection, page, filter);
+  reply.send({ blogs });
 }

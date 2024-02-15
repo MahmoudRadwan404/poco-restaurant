@@ -6,9 +6,7 @@ import formBody from "@fastify/formbody";
 
 const app = fastify({ logger: false });
 app.register(formBody);
-app.register(multiPart, {
-  attachFieldsToBody: "keyValues",
-});
+app.register(multiPart);
 
 app.register(fastifyStatic, {
   root: path.join(process.cwd(), "storage/uploads"),
