@@ -6,8 +6,16 @@ import updateItem from "../controllers/cart/update-item";
 import checkout from "../controllers/cart/checkout";
 import { userMiddleware } from "../helper/middlewares/middlewares";
 
-app.get("/cart", userMiddleware, displayItems);
-app.delete("/cart/clear", userMiddleware, clear);
-app.put("/cart/:itemId", userMiddleware, updateItem);
-app.post("/cart/:itemId", userMiddleware, addItem);
 app.get("/checkout", userMiddleware, checkout);
+
+app.get("/cart", userMiddleware, displayItems);
+app.register(
+  (app, ops, next) => {
+    app.delete("/clear", userMiddleware, clear);
+    app.put("/:itemId", userMiddleware, updateItem);
+    app.post("/:itemId", userMiddleware, addItem);
+
+    next();
+  },
+  { prefix: "/cart" }
+);

@@ -9,7 +9,13 @@ import { adminMiddleware } from "../helper/middlewares/middlewares";
 
 app.get("/dishes", listDishes);
 app.get("/dishes/:dishId", showDish);
-app.post("/admin/dishes", adminMiddleware, addDish);
-app.get("/admin/dishes", adminMiddleware, listDishesAdmin);
-app.put("/admin/dishes/:dishId", adminMiddleware, updateDish);
-app.delete("/admin/dishes/:dishId", adminMiddleware, deleteDish);
+app.register(
+  (app, ops, next) => {
+    app.post("/dishes", adminMiddleware, addDish);
+    app.get("/dishes", adminMiddleware, listDishesAdmin);
+    app.put("/dishes/:dishId", adminMiddleware, updateDish);
+    app.delete("/dishes/:dishId", adminMiddleware, deleteDish);
+    next();
+  },
+  { prefix: "/admin" }
+);

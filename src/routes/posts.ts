@@ -9,7 +9,14 @@ import { adminMiddleware } from "../helper/middlewares/middlewares";
 
 app.get("/posts", listBlogs);
 app.get("/posts/:id", displayBlog);
-app.get("/admin/posts", adminMiddleware, adminListPosts);
-app.post("/admin/posts", adminMiddleware, addBlog);
-app.put("/admin/posts/:id", adminMiddleware, updateBlog);
-app.delete("/admin/posts/:id", adminMiddleware, deleteBlog);
+app.register(
+  (app, ops, next) => {
+    app.get("/posts", adminMiddleware, adminListPosts);
+    app.post("/posts", adminMiddleware, addBlog);
+    app.put("/posts/:id", adminMiddleware, updateBlog);
+    app.delete("/posts/:id", adminMiddleware, deleteBlog);
+
+    next();
+  },
+  { prefix: "/admin" }
+);

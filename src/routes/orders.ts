@@ -6,8 +6,15 @@ import rejectSpoiledFood from "../controllers/orders/reject-spoiled-food";
 import listOrders from "../controllers/orders/list-orders";
 import { adminMiddleware } from "../helper/middlewares/middlewares";
 
-app.get("/admin/orders", adminMiddleware, listOrders);
-app.patch("/admin/orders/reject/:orderId", adminMiddleware, rejectOrder);
-app.patch("/admin/orders/accept/:orderId", adminMiddleware, acceptOrder);
-app.patch("/admin/reject/:spoiledId", adminMiddleware, rejectSpoiledFood);
-app.patch("/admin/accept/:spoiledId", adminMiddleware, acceptSpoiledFood);
+app.register(
+  (app, ops, next) => {
+    app.get("/orders", adminMiddleware, listOrders);
+    app.patch("/orders/reject/:orderId", adminMiddleware, rejectOrder);
+    app.patch("/orders/accept/:orderId", adminMiddleware, acceptOrder);
+    app.patch("/reject/:spoiledId", adminMiddleware, rejectSpoiledFood);
+    app.patch("/accept/:spoiledId", adminMiddleware, acceptSpoiledFood);
+
+    next();
+  },
+  { prefix: "/admin" }
+);
