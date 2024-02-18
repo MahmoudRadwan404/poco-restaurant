@@ -6,6 +6,7 @@ import updateDish from "../controllers/dishes/update-dish";
 import listDishes from "../controllers/dishes/list-dishes";
 import showDish from "../controllers/dishes/show-dish";
 import { adminMiddleware } from "../helper/middlewares/middlewares";
+import { adminPrefix } from "../helper/prefix";
 
 app.get("/dishes", listDishes);
 app.get("/dishes/:dishId", showDish);
@@ -17,5 +18,5 @@ app.register(
     app.delete("/dishes/:dishId", adminMiddleware, deleteDish);
     next();
   },
-  { prefix: "/admin" }
+  adminPrefix
 );

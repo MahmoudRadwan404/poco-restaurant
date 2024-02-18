@@ -9,14 +9,12 @@ import {
   adminMiddleware,
   userMiddleware,
 } from "../helper/middlewares/middlewares";
+import { adminReviewsPrefix } from "../helper/prefix";
 
 app.post("/reviews/:dishId", userMiddleware, addReview);
 app.get("/reviews/:dishId", userMiddleware, displayReviews);
-app.register(
-  (app, ops, next) => {
-    app.put("/:reviewId", adminMiddleware, updateReview);
-    app.delete("/:reviewId", adminMiddleware, deleteReview);
-    next();
-  },
-  { prefix: "/admin/reviews" }
-);
+app.register((app, ops, next) => {
+  app.put("/:reviewId", adminMiddleware, updateReview);
+  app.delete("/:reviewId", adminMiddleware, deleteReview);
+  next();
+}, adminReviewsPrefix);

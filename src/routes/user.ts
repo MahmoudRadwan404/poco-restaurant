@@ -10,20 +10,18 @@ import reset from "../controllers/users/reset";
 import verifyEmail from "../controllers/users/verify-email";
 import { adminMiddleware } from "../helper/middlewares/middlewares";
 import test from "../controllers/users/test";
+import { adminPrefix } from "../helper/prefix";
 //Users Login,Registration,Forget,Reset.
 app.post("/signup", signup);
 app.post("/login", login);
 app.post("/forget", forget);
 app.post("/reset", reset);
 app.post("/verify/email", verifyEmail);
-app.register(
-  (app, ops, next) => {
-    app.get("/users", displayUsers);
-    app.patch("/users/:id", adminMiddleware, updateUser);
-    app.delete("/users/:id", adminMiddleware, deleteUser);
-    app.get("/users/:id", adminMiddleware, displayUser);
+app.register((app, ops, next) => {
+  app.get("/users", displayUsers);
+  app.patch("/users/:id", adminMiddleware, updateUser);
+  app.delete("/users/:id", adminMiddleware, deleteUser);
+  app.get("/users/:id", adminMiddleware, displayUser);
 
-    next();
-  },
-  { prefix: "/admin" }
-);
+  next();
+}, adminPrefix);

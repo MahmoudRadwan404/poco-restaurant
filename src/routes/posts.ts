@@ -6,6 +6,7 @@ import deleteBlog from "../controllers/blogs/delete-blog";
 import updateBlog from "../controllers/blogs/update-blog";
 import adminListPosts from "../controllers/blogs/admin-list-posts";
 import { adminMiddleware } from "../helper/middlewares/middlewares";
+import { adminPrefix } from "../helper/prefix";
 
 app.get("/posts", listBlogs);
 app.get("/posts/:id", displayBlog);
@@ -18,5 +19,5 @@ app.register(
 
     next();
   },
-  { prefix: "/admin" }
+ adminPrefix
 );

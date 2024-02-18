@@ -4,16 +4,14 @@ import createAddress from "../controllers/address/create-address";
 import updateAddress from "../controllers/address/update-address";
 import deleteAddress from "../controllers/address/delete-address";
 import { userMiddleware } from "../helper/middlewares/middlewares";
+import { addressPrefix } from "../helper/prefix";
 
 app.get("/addresses", userMiddleware, getAddresses);
 app.post("/addresses", userMiddleware, createAddress);
 
-app.register(
-  (app, ops, next) => {
-    app.put("/:id", userMiddleware, updateAddress);
-    app.delete("/:id", userMiddleware, deleteAddress);
+app.register((app, ops, next) => {
+  app.put("/:id", userMiddleware, updateAddress);
+  app.delete("/:id", userMiddleware, deleteAddress);
 
-    next();
-  },
-  { prefix: "/addresses" }
-);
+  next();
+}, addressPrefix);

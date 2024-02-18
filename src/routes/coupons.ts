@@ -9,6 +9,7 @@ import {
   adminMiddleware,
   userMiddleware,
 } from "../helper/middlewares/middlewares";
+import { adminPrefix } from "../helper/prefix";
 
 app.get("/coupon/apply", userMiddleware, apply);
 
@@ -22,5 +23,5 @@ app.register(
 
     next();
   },
-  { prefix: "/admin" }
+  adminPrefix
 );

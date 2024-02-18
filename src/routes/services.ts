@@ -9,6 +9,7 @@ import {
   adminMiddleware,
   userMiddleware,
 } from "../helper/middlewares/middlewares";
+import { adminPrefix } from "../helper/prefix";
 
 app.post("/contactUs", sendMessage);
 app.post("/subscribe", subscribe);
@@ -20,5 +21,4 @@ app.register(
     app.post("/faq/:messageId", adminMiddleware, answerQuestions);
     next();
   },
-  { prefix: "/admin" }
-);
+adminPrefix);
