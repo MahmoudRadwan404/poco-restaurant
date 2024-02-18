@@ -6,7 +6,7 @@ import updateItem from "../controllers/cart/update-item";
 import checkout from "../controllers/cart/checkout";
 import { userMiddleware } from "../helper/middlewares/middlewares";
 
-app.get("/checkout", userMiddleware, checkout);
+app.get("/checkout/:id", userMiddleware, checkout);
 
 app.get("/cart", userMiddleware, displayItems);
 app.register(
