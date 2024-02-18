@@ -21,6 +21,7 @@ export default async function addItem(
     itemId,
     quantity,
     price: dish?.price,
+    name:dish?.name,
     userId,
   });
   return reply.code(201).send({ message: "Item added to the cart" });

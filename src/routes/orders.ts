@@ -9,7 +9,7 @@ import { adminPrefix } from "../helper/prefix";
 
 app.register(
   (app, ops, next) => {
-    app.get("/orders", adminMiddleware, listOrders);
+    app.get("/orders", listOrders);
     app.patch("/orders/reject/:orderId", adminMiddleware, rejectOrder);
     app.patch("/orders/accept/:orderId", adminMiddleware, acceptOrder);
     app.patch("/reject/:spoiledId", adminMiddleware, rejectSpoiledFood);

@@ -31,10 +31,13 @@ export default async function listOrders(
             quantity: "$quantity",
             price: "$price",
             totalPrice: "$totalPrice",
+            name: "$order.userId",
+
           },
         },
       },
     },
+
   ];
   const orders = await ordersCollections.aggregate(pipeline).toArray();
   if (orders) {
