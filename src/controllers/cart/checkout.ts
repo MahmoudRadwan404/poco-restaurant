@@ -14,8 +14,8 @@ export default async function checkout(
   const ordersCollection = collection("orders");
   const userId = (request as any).user._id;
   const address = addresses.findOne({ _id: new ObjectId(addressId) });
-  const order = await cart.find({ userId: new ObjectId(userId) }).toArray();
+  const meals = await cart.find({ userId: new ObjectId(userId) }).toArray();
   const status = "pending";
-  await ordersCollection.insertOne({ order, status, address });
+  await ordersCollection.insertOne({ meals, status, address });
   reply.send("Order placed successfully!");
 }

@@ -10,7 +10,33 @@ export default async function listOrders(
   const requestHandler = handle(req);
   const ordersCollections = collection("orders");
   const page = +requestHandler.input("page") || 1;
-  const orders = await listWithPagination(ordersCollections, page, []);
+  const pipeline = [
+    { $unwind: "$order" },
+    {
+      $project: {
+        _id: 0,
+        orderId: "$_id",
+        productName: "$order.name",
+        quantity: "$order.quantity",
+        price: "$order.price",
+        totalPrice: { $multiply: ["$order.price", "$order.quantity"] },
+      },
+    },
+    {
+      $group: {
+        _id: "$orderId",
+        totalOrderPrice: { $sum: "$totalPrice" },
+        items: {
+          $push: {
+            quantity: "$quantity",
+            price: "$price",
+            totalPrice: "$totalPrice",
+          },
+        },
+      },
+    },
+  ];
+  const orders = await ordersCollections.aggregate(pipeline).toArray();
   if (orders) {
     reply.send(orders);
   } else {
