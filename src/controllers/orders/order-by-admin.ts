@@ -20,7 +20,7 @@ export default async function orderByAdmin(
   const createdAt = new Date(Date.now());
   const createdBy = (request as any).user._id;
   const status = "accepted";
-  if (!customer || !items || !totalMoney || !shippingAddress) {
+  if (!customer || !items  || !shippingAddress) {
     reply.status(404).send({ msg: "All fields are required" });
   }
   if (coupon) {

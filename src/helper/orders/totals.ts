@@ -3,6 +3,7 @@ import { collection } from "../../database/connection";
 
 export async function totals(items: any[]) {
   const dishesCollection = collection("dishes");
+  
   let price = 0;
   for (let i = 0; i < items.length; i++) {
     const itemId = items[i].id;
