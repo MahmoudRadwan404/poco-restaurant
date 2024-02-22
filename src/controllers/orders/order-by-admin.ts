@@ -1,6 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import handle from "../../core/request";
 import { collection } from "../../database/connection";
+import { totals } from "../../helper/orders/totals";
+import applyCoupon from "../../helper/orders/coupon";
 
 export default async function orderByAdmin(
   request: FastifyRequest,
@@ -12,9 +14,9 @@ export default async function orderByAdmin(
     "shippingAddress",
   ]);
   const ordersCollection = collection("orders");
-  const items = requestHandler.input("items");
-  let totalMoney = +requestHandler.input("totals");
+  const items: any[] = requestHandler.input("items"); //contains array of objects of quantities and mealId
   const coupon = requestHandler.input("coupon");
+  let totalMoney = await totals(items);
   const createdAt = new Date(Date.now());
   const createdBy = (request as any).user._id;
   const status = "accepted";
@@ -22,21 +24,7 @@ export default async function orderByAdmin(
     reply.status(404).send({ msg: "All fields are required" });
   }
   if (coupon) {
-    const couponCollection = collection("coupons");
-    const couponData = await couponCollection.findOne({ code: coupon });
-    if (
-      couponData?.type == "number" &&
-      couponData.availableCoupons > 0 &&
-      couponData.minimumOrder <= totalMoney
-    ) {
-      totalMoney = totalMoney - couponData.value;
-    } else {
-      totalMoney = totalMoney * (couponData?.value / 100);
-    }
-    await couponCollection.updateOne(
-      { code: coupon },
-      { $inc: { availableCoupons: -1 } }
-    );
+    totalMoney = await applyCoupon(coupon, totalMoney);
   }
   try {
     const result = await ordersCollection.insertOne({
