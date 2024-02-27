@@ -11,9 +11,7 @@ export default async function dishesByCategories(
   const dishesCollection = collection("dishes");
   const page = +requestHandler.input("page") || 1;
   const categoryId = requestHandler.input("categoryId");
-  const result = listWithPagination(dishesCollection, page, [
-    { dishCategory: categoryId },
-  ]);
+  const result =await listWithPagination(dishesCollection, page, [{ categoryId }]);
   if (!result) {
     reply.status(404).send({ Error: "Error returning categories" });
   } else {

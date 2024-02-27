@@ -11,7 +11,18 @@ export default async function listDishes(
   const requestHandeler = handle(request);
   const dishesCollection = collection("dishes");
   const limit = 10;
-  const page = requestHandeler.input("page") || 1;
+  const page = +requestHandeler.input("page") || 1;
+  const skip = (page - 1) * limit;
+  const dishesForPagination = await dishesCollection
+    .aggregate([
+      {
+        $match: {
+          published: true,
+        },
+      },
+    ])
+    .toArray();
+  const dishesLength = dishesForPagination.length;
   const dishes = await dishesCollection
     .aggregate([
       {
@@ -21,7 +32,10 @@ export default async function listDishes(
       },
       joinDishesWithReviews,
       showDishedAndReviews,
+      { $skip: skip },
+      { $limit: limit },
     ])
     .toArray();
-  reply.status(200).send(dishes);
+
+  reply.status(200).send({ page, limit, total: dishesLength, dishes });
 }

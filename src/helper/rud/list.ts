@@ -3,14 +3,15 @@ export default async function listWithPagination(
   page: number,
   filter: any
 ) {
-  const skip = (page - 1) * 15;
   const limit = 15;
+  const skip = (page - 1) * limit;
   try {
     const result = await collection
-      .find({ ...filter })
+      .find(...filter )
       .limit(limit)
       .skip(skip)
       .toArray();
+
     const pagination = {
       pages: Math.ceil(result.length / limit),
       page: page,

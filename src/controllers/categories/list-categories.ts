@@ -9,7 +9,7 @@ export default async function listCategories(
   const requestHandler = handle(request);
   const categoriesCollection = collection("categories");
   const page = +requestHandler.input("page") || 1;
-  const categories = await listWithPagination(categoriesCollection, page,[]);
+  const categories = await listWithPagination(categoriesCollection, page, []);
   if (categories) {
     reply.send(categories);
   } else {

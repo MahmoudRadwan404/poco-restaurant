@@ -8,7 +8,7 @@ export default async function addItem(
   reply: FastifyReply
 ) {
   const requestHandeler = handle(request);
-  const itemId = requestHandeler.input("itemId");
+  const itemId:string = requestHandeler.input("itemId");
   const quantity = +requestHandeler.input("quantity");
   const dishes = collection("dishes");
   const dish = await dishes.findOne({ _id: new ObjectId(itemId) });

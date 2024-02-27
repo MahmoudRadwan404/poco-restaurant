@@ -19,5 +19,7 @@ export const showDishedAndReviews = {
     },
     numberOfReviews: { $ifNull: [{ $size: "$newReviews" }, 0] },
     price: 1,
+    description:1,
+    ingredients:1
   },
 };
