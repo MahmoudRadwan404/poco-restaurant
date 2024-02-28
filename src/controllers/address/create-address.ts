@@ -7,14 +7,13 @@ export default async function createAddress(
   reply: FastifyReply
 ) {
   const requestHandeler = handle(request);
-  const { street, city, address, type, area } = requestHandeler.only([
+  const { street, city, paymentType, area } = requestHandeler.only([
     "street",
     "city",
-    "address",
-    "type",
+    "paymentType",
     "area",
   ]);
-  if (!street || !city || !address || !type) {
+  if (!street || !city || !paymentType || !area) {
     reply.send({ msg: "All fields are required" });
   }
   const userId = (request as any).user._id;
@@ -22,8 +21,7 @@ export default async function createAddress(
   await addressesCollection.insertOne({
     street,
     city,
-    address,
-    type,
+    paymentType,
     userId,
     area,
   });

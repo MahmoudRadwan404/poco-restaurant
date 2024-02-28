@@ -5,7 +5,7 @@ export default async function deleteDoc(collection: any, id: any) {
     const deleted = await collection.deleteOne({
       _id: new ObjectId(id),
     });
-    return { msg: `deleted successfully ${deleted}` };
+    return { msg: `deleted successfully ` };
   } catch (err) {
     return false;
   }

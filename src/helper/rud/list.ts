@@ -15,7 +15,7 @@ export default async function listWithPagination(
     const pagination = {
       pages: Math.ceil(result.length / limit),
       page: page,
-      categories: result.length,
+      total: result.length,
     };
     return { pagination, result };
   } catch (err) {

@@ -11,20 +11,19 @@ export default async function apply(
   const requestHandler = handle(request);
   //const couponId = requestHandler.input("couponId");
   const cartCollection = collection("cart");
-  const couponsCollection = collection("coupons");
+  const couponsCollection = collection("userCoupon");
   const date = new Date(Date.now());
-  const userId = (request as any).user._id;
+  const userId : string= (request as any).user._id;
   const users = collection("users");
   let coupon;
   let discountPercentage;
   try {
-    const user = await users.findOne({ _id: new ObjectId(userId) });
-    coupon = await couponsCollection.findOne({ _id: user?.coupon });
-    console.log(coupon)
-    if (coupon?.start > date && coupon?.end < date) {
+    coupon = await couponsCollection.findOne({ userId: userId });
+    console.log(coupon?.coupon.start > date)
+    if (coupon?.coupon.start > date && coupon?.coupon.end < date) {
       return reply.send({ msg: "expired coupon" });
     }
-    if (coupon?.type == "percentage") {
+    if (coupon?.coupon.type == "percentage") {
       discountPercentage = coupon.value;
 
       const result = await cartCollection.aggregate([
@@ -65,7 +64,7 @@ export default async function apply(
         },
       ]).toArray();
       reply.send(result);
-    } else if (coupon?.type == "number") {
+    } else if (coupon?.coupon.type == "number") {
       const result = await cartCollection.aggregate([
         {
           $match: { userId: userId },
@@ -83,7 +82,7 @@ export default async function apply(
         },
         {
           $addFields: {
-            discountPrice: { $subtract: ["$totalPrice", coupon?.value] },
+            discountPrice: { $subtract: ["$totalPrice", coupon?.coupon.value] },
           },
         },
         {

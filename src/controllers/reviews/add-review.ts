@@ -11,10 +11,9 @@ export default async function addReview(
   const dishId = requestHandeler.input("dishId");
   const rating: number = +requestHandeler.input("rate");
   const review: string = requestHandeler.input("review");
-  const reviewer: string = requestHandeler.input("name");
-  const email: string = requestHandeler.input("email");
+  const reviewer: string = (request as any).user._id;
   const reviewsCollection = collection("reviews");
-  if (!rating || !review || !reviewer || !email) {
+  if (!rating || !review) {
     reply.send({ msg: "All fields ara required" });
   }
   try {
@@ -23,7 +22,6 @@ export default async function addReview(
       rating,
       review,
       reviewer,
-      email,
     });
     reply.status(200).send("inserted successfully");
   } catch (err) {

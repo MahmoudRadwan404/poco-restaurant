@@ -8,7 +8,7 @@ export default async function updateReview(
   reply: FastifyReply
 ) {
   const requestHandeler = handle(request);
-  const reviewId = requestHandeler.input("reviewId");
+  const reviewId :string= requestHandeler.input("reviewId");
   const reviewsCollection = collection("reviews");
   const reviews = await reviewsCollection.updateOne(
     {

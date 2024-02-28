@@ -10,16 +10,14 @@ export default async function updateItem(
 ) {
   const requestHandeler = handle(request);
   const cartCollection = collection("cart");
-  const itemId = requestHandeler.input("itemId");
-  const userId = (request as any).user._id;
-  const quantity = requestHandeler.input("quantity");
-  const result = await updateDoc(
-    cartCollection,
-    [{ itemId: new ObjectId(itemId) }, { userId: new ObjectId(userId) }],
-    request
+  const itemId: string = requestHandeler.input("itemId");
+  const quantity = +requestHandeler.input("quantity");
+  const result = await cartCollection.updateOne(
+    { _id: new ObjectId(itemId) },
+    { $set: { quantity: quantity } }
   );
   if (!result) {
-    reply.send("error updating address");
+    reply.send("error updating item");
   } else {
     reply.send(result);
   }

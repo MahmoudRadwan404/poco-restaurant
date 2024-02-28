@@ -9,7 +9,7 @@ export default async function updateAddress(
   reply: FastifyReply
 ) {
   const requestHandler = handle(request);
-  const addressId = requestHandler.input("id");
+  const addressId:string = requestHandler.input("id");
   const addressesCollection = collection("addresses");
   const result = await updateDoc(
     addressesCollection,
