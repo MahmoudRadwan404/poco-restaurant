@@ -134,7 +134,7 @@ A comprehensive REST API for managing restaurant operations including menu manag
    npm start
    ```
 
-The API will be available at `http://localhost:3000`
+The API will be available at `http://localhost:4000`
 
 ## 🔐 Authentication
 
